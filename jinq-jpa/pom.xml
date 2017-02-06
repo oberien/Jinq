@@ -19,8 +19,38 @@
         <targetPath>META-INF</targetPath>
         <directory>test/META-INF</directory>
       </testResource>
+      <testResource>
+        <directory>${project.build.outputDirectory}</directory>
+      </testResource>
     </testResources>
     <directory>target</directory>
+      <plugins>
+        <plugin>
+          <groupId>de.empulse.eclipselink</groupId>
+          <artifactId>staticweave-maven-plugin</artifactId>
+          <version>1.0.0</version>
+          <executions>
+            <execution>
+              <phase>process-test-classes</phase>
+              <goals>
+                <goal>weave</goal>
+              </goals>
+              <configuration>
+                <logLevel>ALL</logLevel>
+                <source>${project.build.testOutputDirectory}</source>
+                <target>${project.build.testOutputDirectory}</target>
+              </configuration>
+            </execution>
+          </executions>
+          <dependencies>
+            <dependency>
+              <groupId>org.eclipse.persistence</groupId>
+              <artifactId>org.eclipse.persistence.jpa</artifactId>
+              <version>2.5.1</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+      </plugins>
   </build>
   
   <dependencies>

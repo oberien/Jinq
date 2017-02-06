@@ -84,7 +84,7 @@ public class Customer implements Serializable {
 
 
 	//bi-directional many-to-one association to Sale
-	@OneToMany(mappedBy="customer")
+	@OneToMany(mappedBy="customer", fetch = FetchType.LAZY)
 	public List<Sale> getSales() {
 		return this.sales;
 	}
